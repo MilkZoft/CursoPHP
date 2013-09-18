@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Aprende PHP desde cero por Carlos Santana</title>
+
+		<meta name="description" content="Aprende PHP desde cero">
+		<meta name="author" content="Carlos Santana">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style>
+			.center {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!-- Slide 1: Presentación -->
+				<section class="center">
+					<p>
+						<img style="border: none; margin: 0 auto; display: block; width: auto;" height="200" src="images/logo.png" alt="Codejobs">
+					</p>
+					
+					<h1>Aprende PHP desde cero</h1>
+					
+					<p>
+						<small>Instructor: <a href="http://twitter.com/czantany">Carlos Santana</a> / <a href="http://twitter.com/czantany">@czantany</a></small>
+					</p>					
+				</section>
+
+				<!-- Slide 2: Instalación -->
+				<section>
+					<section>
+						<h2>Instalación LAMP</h2>
+
+						<ol>
+							<li>Instalación en Windows &amp; Mac</li>
+							<li>Instalación en Linux</li>
+						</ol>
+
+						<img style="border: none; float: right; margin-top: 300px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+					
+					<section>
+						<h2>Instalación en Windows &amp; Mac</h2>
+
+						<p>
+							Para Windows &amp; Mac lo más sencillo es instalar un paquete que contenga todas las herramientas que necesitamos, algunas de ellas son: <br /><br />
+							-EasyPHP (Windows) <br />
+							-MAMP (Mac) <br />
+							-WAMP (Windows) <br />
+							-XAMP (Mac &amp; Windows)
+						</p>
+	
+						<img style="border: none; float: right;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Instalación en Linux</h2>
+						
+						<p>
+							<strong>sudo apt-get install</strong> php5 libapache2-mod-php5 mysql-server mysql-client apache2 php5-mysqli phpmyadmin<br /> <br />
+							sudo vi /etc/apache2/apache.conf <br />
+							<strong>Agregar la siguiente línea:</strong>
+							<em>Include /etc/phpmyadmin/apache.conf</em> <br /> <br />
+							sudo vi /etc/phpmyadmin/apache.conf <br />
+							<strong>Agregamos "AllowOverride All"</strong> dentro de &lt;Directory /usr/share/phpmyadmin&gt; <br />
+							service apache2 restart <br />
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+				</section>
+
+				<!-- Slide 2: Variables, arrays, cadenas y estructuras de control -->
+				<section>
+					<section>
+						<h2>Variables, arrays, cadenas y estructuras de control</h2>
+						
+						<ol>
+							<li>Tipos de datos</li>
+							<li>Manejo de variables</li>
+							<li>Arrays escalares y asociativos</li>
+							<li>Manejo de cadenas</li>
+							<li>Estructuras de Control</li>
+							<li>Operadores</li>
+						</ol>
+
+						<img style="border: none; float: right; margin-top: 100px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Tipos de datos</h2>
+						
+						<p>
+							PHP soporta ocho tipos primitivos. 
+						</p>
+
+						<ul>
+							<li>boolean</li>
+							<li>integer</li>
+							<li>float (número de punto flotante, también conocido como double)</li>
+							<li>string</li>
+							<li>array (compuesto)</li>
+							<li>object (compuesto)</li>
+							<li>resource (especial)</li>
+							<li>NULL (especial)</li>
+						</ul>
+
+						<img style="border: none; float: right;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Manejo de variables</h2>
+						
+						<p>
+							<h4>isset</h4>
+
+							Determina si una variable está definida y no es NULL.
+						</p>
+
+<pre><code style="height: 300px;" data-trim contenteditable>
+$var = '';
+
+// Esto evaluará a TRUE así que el texto se imprimirá.
+if (isset($var)) {
+    echo "Esta variable está definida, así que se imprimirá";
+}
+
+// En los siguientes ejemplos usaremos var_dump para imprimir
+// el valor devuelto por isset().
+
+$a = "prueba";
+$b = "otraprueba";
+
+var_dump(isset($a));      // TRUE
+var_dump(isset($a, $b)); // TRUE
+
+unset ($a);
+
+var_dump(isset($a));     // FALSE
+var_dump(isset($a, $b)); // FALSE
+
+$foo = null;
+var_dump(isset($foo));   // FALSE
+</code></pre>
+					
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Manejo de variables</h2>
+						
+						<p>
+							<h4>empty</h4>
+
+							Determina si una variable está vacía.
+						</p>
+
+<pre><code style="height: 300px;" data-trim contenteditable>
+$var = 0;
+
+// Se evalúa a true ya que $var está vacia
+if (empty($var)) {
+    echo '$var es o bien 0, vacía, o no se encuentra definida en absoluto';
+}
+
+// Se evalúa como true ya que $var está definida
+if (isset($var)) {
+    echo '$var está definida a pesar que está vacía';
+}
+
+$str = '            ';
+var_dump(empty($str)); // boolean false
+
+//Recuerda siempre quitar los espacios con trim
+
+$str = '        ';
+$str = trim($str);
+var_dump(empty($str)); // boolean true
+</code></pre>
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Variables variables</h2>
+						
+						<p>
+							A veces es conveniente tener nombres de variables variables. Dicho de otro modo, son nombres de variables que se pueden definir y usar dinámicamente. Una variable normal se establece con una sentencia como:
+						</p>
+
+<pre><code data-trim contenteditable>
+$a = 'hola';
+</code></pre>
+
+						<p>
+							Una variable variable toma el valor de una variable y lo trata como el nombre de una variable. En el ejemplo anterior, hola, se puede usar como el nombre de una variable utilizando dos signos de dólar. Es decir:
+						</p>
+
+<pre style="width: 300px;"><code style="width: 300px;" data-trim contenteditable>
+$$a = 'mundo';
+
+echo "$a $hola";
+</code></pre>
+						<img style="border: none; float: right; margin-top: -70px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Arrays escalares y asociativos</h2>
+
+						<p>
+							En PHP, los arrays pueden estar compuestos de elementos de diferente naturaleza y su primer índice o posición es la 0. Además, existen unos arrays especiales en PHP denominados asociativos en los que el índice es un valor de tipo string, de modo que cada posición está definida por el par (clave, valor), pudiendo acceder al contenido (valor) a través de la clave.
+						</p>
+
+						<p><h4>Ejemplo de array escalar:</strong></p>
+
+<pre style="float: left; width: 600px;"><code style="width: 600px;" data-trim contenteditable>
+$array[0] = "Mi Nombre";
+$array[1] = "es Carlos y tengo";
+$array[] = "25 años"; //Lo insertara en la posición 2.
+
+for ($i = 0; $i <= count($array) – 1; $i++) { 
+	echo $array[$i] ." ";
+} 
+</code></pre>
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<div style="clear: both;"></div>
+					</section>
+
+					<section>
+						<p><h4>Ejemplo de array asociativo:</strong></p>
+
+<pre><code data-trim contenteditable>
+$array["nombre"] = "Mi Nombre";
+$array["es"] = "es Carlos y tengo";
+$array["tengo"] = "25 años"; 
+	
+echo $array["nombre"] ." ". $array["es"] ." ". $array["tengo"];
+</code></pre>
+						<img style="border: none; float: right; margin-top: 300px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Manejo de cadenas</h2>
+
+						<p>
+							<h4>echo vs print</h4>
+						
+							Aunque echo y print no son funciones sino construcciones del lenguaje (tales como if, while o list()), la principal diferencia es que print puede comportarse como una función, puesto que devuelve el valor 1, por lo que es posible que una instrucción print se encuentre participando en expresiones complejas, donde echo generaría un error. Ello nos lleva a que print es algo más lento que echo, puesto que pierde un tiempo en ocuparse de devolver el valor.							
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Manejo de cadenas</h2>
+
+						<p>
+							<h4>Concatenación</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Estructuras de Control</h2>
+
+						<p>
+							<h4>if, else, elseif...</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Estructuras de Control</h2>
+
+						<p>
+							<h4>if compacto (ternario)</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Estructuras de Control</h2>
+
+						<p>
+							<h4>for vs foreach</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Estructuras de Control</h2>
+
+						<p>
+							<h4>while vs do... while</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Estructuras de Control</h2>
+
+						<p>
+							<h4>switch</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Operadores</h2>
+
+						<p>
+							<h4>Aritmétios</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Operadores</h2>
+
+						<p>
+							<h4>Lógicos</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Operadores</h2>
+
+						<p>
+							<h4>De Asignación</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Operadores</h2>
+
+						<p>
+							<h4>Precedencia de operadores</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Operadores</h2>
+
+						<p>
+							<h4>Incremento y decremento</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Operadores</h2>
+
+						<p>
+							<h4>Omisión de errores</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Uso de formularios</h2>
+						
+						<ol>
+							<li>Envío de datos</li>
+							<li>$_GET</li>
+							<li>$_POST</li>
+							<li>$_REQUEST</li>
+							<li>Sanitización de variables</li>
+						</ol>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Uso de formularios</h2>
+
+						<p>
+							<h4>Envío de datos</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Uso de formularios</h2>
+
+						<p>
+							<h4>$_GET</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Uso de formularios</h2>
+
+						<p>
+							<h4>$_POST</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Uso de formularios</h2>
+
+						<p>
+							<h4>$_REQUEST</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Uso de formularios</h2>
+
+						<p>
+							<h4>Sanitización de variables</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Funciones</h2>
+						
+						<ol>
+							<li>Parámetros obligatorios y opcionales</li>
+							<li>Regresar valores</li>
+							<li>Funciones anónimas</li>
+						</ol>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Funciones</h2>
+
+						<p>
+							<h4>Parámetros obligatorios y opcionales</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Funciones</h2>
+
+						<p>
+							<h4>Regresar valores</h4>
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Funciones</h2>
+
+						<p>
+							<h4>Funciones anónimas</h4> <br />
+						
+								
+						</p>
+
+						<img style="border: none; float: right; margin-top: -20px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+				</section>
+
+				<section>
+					<h2>Works in Mobile Safari</h2>
+					<p>
+						Try it out! You can swipe through the slides and pinch your way to the overview.
+					</p>
+				</section>
+
+				<section>
+					<h2>Marvelous Unordered List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  For those of you who like that sort of thing.
+						  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=cube#/transitions">Cube</a> -
+						<a href="?transition=page#/transitions">Page</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a> -
+						<a href="?transition=linear#/transitions">Linear</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?#/transitions">Default</a>
+					</p>
+				</section>
+
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						Reveal.js comes with a few themes built in: <br>
+						<a href="?theme=sky#/themes">Sky</a> -
+						<a href="?theme=beige#/themes">Beige</a> -
+						<a href="?theme=simple#/themes">Simple</a> -
+						<a href="?theme=serif#/themes">Serif</a> -
+						<a href="?theme=night#/themes">Night</a> -
+						<a href="?#/themes">Default</a>
+					</p>
+					<p>
+						<small>
+							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
+						</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the background.
+					</p>
+				</section>
+
+				<section data-state="customevent">
+					<h2>Custom Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<section data-background="#007777">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#007777"</code> on a slide to change the full page background to the given color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="image navigate-down">
+							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Repeated Image Backgrounds</h2>
+						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+				</section>
+
+				<section data-transition="linear" data-background="#4d7e65" data-background-transition="slide">
+					<h2>Background Transitions</h2>
+					<p>
+						Pass reveal.js the <code>backgroundTransition: 'slide'</code> config argument to make backgrounds slide rather than fade.
+					</p>
+				</section>
+
+				<section data-transition="linear" data-background="#8c4738" data-background-transition="slide">
+					<h2>Background Transition Override</h2>
+					<p>
+						You can override background transitions per slide by using <code>data-background-transition="slide"</code>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) ) {
+        node.className += ' roll';
+      }
+    };
+  }
+}
+					</code></pre>
+					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>Fragmented Views</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<ol>
+							<li class="fragment"><code>any type</code></li>
+							<li class="fragment"><em>of view</em></li>
+							<li class="fragment"><h4>fragments</strong></li>
+						</ol>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's a few styles of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment roll-in">roll-in</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-green">highlight-green</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>Spectacular image!</h2>
+					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
+						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
+					</a>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
+					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
+					<script>
+						document.getElementById('slideshare').attributeName = 'allowfullscreen';
+					</script>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
+						during a presentation.
+					</p>
+				</section>
+
+				<section>
+					<h2>Stellar Links</h2>
+					<ul>
+						<li><a href="http://slid.es">Try the online editor</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>
+						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>THE END</h1>
+					<h3>BY Hakim El Hattab / hakim.se</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
