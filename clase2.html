@@ -931,8 +931,540 @@ if (isset($_POST["subir"])) {
 				</section>
 
 				<section>
+					<section>
+						<h2>Bases de Datos (MySQL)</h2>
+						
+						<ol>
+							<li>Conexión a una base de datos</li>
+							<li>Búsquedas y consultas</li>
+							<li>CRUD (Create, Read, Update and Delete)</li>
+							<li>Prevención de inyecciones SQL</li>
+						</ol>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Bases de Datos (MySQL)</h2>
+
+
+						<h4>Conexión a una base de datos</h4>
+						
+<pre><code data-trim contenteditable>						
+$db = mysqli_connect("localhost", "root", "", "agenda") or die("Error " . mysqli_error($connection));
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Bases de Datos (MySQL)</h2>
+	
+						<h4>Búsquedas y consultas</h4>
+						
+<pre><code data-trim contenteditable>						
+$query = "SELECT Nombre FROM contactos";
+
+$result = $db->query($query);
+
+while ($data = mysqli_fecth_array($result)) {
+  	echo $data["Nombre"] . "<br />";
+} 
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Bases de Datos (MySQL)</h2>
+
+						<h4>CRUD (Create, Read, Update and Delete)</h4>
+						
+<pre><code data-trim contenteditable>						
+if (isset($_POST["save"])) {
+	$nombre = $_POST["nombre"];
+
+	$query = "INSERT INTO contactos (Nombre) VALUES ('$nombre')";
+	$db->query($query);
+
+	echo "Registro insertado exitosamente";
+} elseif (isset($_POST["update"])) {
+	$id = $_POST["id"];
+	$nombre = $_POST["nombre"];
+
+	$query = "UPDATE contactos SET Nombre = '$nombre' WHERE ID = '$id'";
+	$db->query($query);
+
+	echo "Registro actualizado exitosamente";
+} elseif (isset($_GET["id"]) and $_GET["action"] == "editar") {
+	$id = $_GET["id"];
+	$query = "SELECT Nombre FROM contactos WHERE ID = '$id'";
+	$result = $db->query($query);
+
+	if ($result->num_rows > 0) {
+		$data = mysqli_fecth_array($result);
+
+		echo '<form action="crud.php" method="post">
+			Nombre: <input name="nombre" type="text" value="'. $data["Nombre"] .'" />
+			<input name="id" type="hidden" value="'. $id .'" /> 
+			<input name="update" type="submit" value="Actualizar" />
+		</form>';			
+	} else {
+		echo "No existe ese id en la db";
+	}
+} elseif (isset($_GET["id"]) and $_GET["action"] == "eliminar"]) {
+	$id = $_GET["id"];
+
+	$query = "DELETE FROM contactos WHERE ID = '$id'";
+	$db->query($query);
+
+	echo "Registro eliminado exitosamente";
+} elseif (isset($_GET["id"]) and $_GET["action"] == "ver") {
+	$id = $_GET["id"];
+
+	$query = "SELECT Nombre FROM contactos WHERE ID = '$id'";
+	$result = $db->query($query);
+
+	if ($result->num_rows > 0) {
+		$data = mysqli_fecth_array($result);
+
+		echo $data["Nombre"];			
+	} else {
+		echo "No existe ese id en la db";
+	}
+
+} else {
+	$query = "SELECT Nombre FROM contactos";
+
+	$result = $db->query($query);
+
+	while ($data = mysqli_fecth_array($result)) {
+	  	echo '<a href="crud.php?action=ver&amp;id='. $data["ID"] .'">'. $data["Nombre"] .'</a> - 
+
+	  	<a href="crud.php?action=editar&amp;id='. $data["ID"] .'">E</a>
+	  	<a href="crud.php?action=eliminar&amp;id='. $data["ID"] .'">X</a>
+	  	<br />";
+	} 
+
+	echo '<br>';
+
+	echo '<form action="crud.php" method="post">
+		Nombre: <input name="nombre" type="text" /> 
+		<input name="save" type="submit" value="Guardar" />
+	</form>';
+}
+
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Bases de Datos (MySQL)</h2>
+
+						<h4>Prevención de inyecciones SQL</h4>
+						
+						<p><img src="http://www.php.net/manual/es/images/fa7c5b5f326e3c4a6cc9db19e7edbaf0-xkcd-bobby-tables.png" /></p>
+<pre><code data-trim contenteditable>						
+//Nuestra consulta:
+$u = $_POST["usuario"]; //Admin
+$p = $_POST["password"]; //1234
+$db->query("SELECT * FROM Usuarios WHERE Usuario='$u' AND Password='$p'");
+//SELECT * FROM Usuarios WHERE Usuario='Admin' AND Password='1234'
+
+//¿Qué pasaría si el usuario escribe ' OR '1'='1 como usuario y lo mismo de contraseña?
+$u = $_POST["usuario"]; //' OR '1'='1
+$p = $_POST["password"]; //' OR '1'='1
+$db->query("SELECT * FROM Usuarios WHERE Usuario='$u' AND Password='$p'");
+
+"SELECT * FROM Usuarios WHERE Usuario = '' OR '1'='1' AND Password = '' or '1'='1'"
+//Accede al sistema.
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+						
+						<ol>
+							<li>Objetos e instancias</li>
+							<li>Constructores vs destructores</li>
+							<li>Ámbitos (public, private, protected y static)</li>
+							<li>Clase abstracta vs Interfaz</li>
+							<li>Herencia</li>
+							<li>Clonación de objetos</li>
+							<li>Sobreescritura de métodos</li>
+							<li>Métodos estáticos</li>
+						</ol>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+
+						<h4>Objetos e instancias</h4>
+						
+<pre><code data-trim contenteditable>						
+class Coche 
+{
+	private $marca  = "Nissan";
+	private $modelo = "Versa";
+	private $color  = "Rojo";
+	private $encendido = false;
+	public $puertas = 4;
+
+	public function __construct($marca, $modelo, $color) 
+	{
+		$this->marca  = $marca;
+		$this->modelo = $modelo;
+		$this->color  = $color;
+	}
+
+	public function encender() 
+	{
+		$this->encendido = true;
+	}
+
+	public function apagar()
+	{
+		$this->encendido = false;
+	}
+
+	pbulic function estado()
+	{
+		if ($this->encendido) {
+			echo "El coche está encendido <br />";
+		} else {
+			echo "El coche está apagado <br />";
+		}
+	}
+
+	public function getMarca()
+	{
+		return $this->marca;
+	}
+
+	public function getModelo()
+	{
+		return $this->modelo;
+	}
+
+	public function getColor()
+	{
+		return $this->color;
+	}
+
+	public function getPuertas()
+	{
+		return $this->puertas;
+	}
+}
+
+$Coche = new Coche();
+$Coche->encender();
+$Coche->estado();
+$Coche->apagar();
+$Coche->estado();
+$Coche->puertas = 5;
+echo $Coche->getMarca();
+echo $Coche->getModelo();
+echo $Coche->getColor();
+echo $Coche->getPuertas();
+
+$Coche = new Coche("Ford", "Lobo", "Negro");
+$Coche->encender();
+$Coche->estado();
+$Coche->apagar();
+$Coche->estado();
+echo $Coche->getPuertas();
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+
+						<h4>Constructores vs destructores</h4>
+						
+<pre><code data-trim contenteditable>						
+class MyDestructableClass {
+   function __construct() {
+       print "En el constructor\n";
+       $this->name = "MyDestructableClass";
+   }
+
+   function __destruct() {
+       print "Destruyendo " . $this->name . "\n";
+   }
+}
+
+$obj = new MyDestructableClass();
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+
+						<h4>Ámbitos (public, private, protected y static)</h4>
+						
+<pre><code data-trim contenteditable>						
+// Public
+public $variable;
+public function doSomething()
+{
+    ...code...
+}
+
+// Private
+private $variable;
+private function doSomething()
+{
+    ...code...
+}
+
+// Protected
+protected $variable;
+protected function doSomething()
+{
+    ...code...
+}
+
+//Static
+static $variable;
+class Foo {
+    public static function unMétodoEstático() {
+        // ...
+    }
+}
+
+Foo::unMétodoEstático();
+$nombreClase = 'Foo';
+$nombreClase::unMétodoEstático(); // A partir de PHP 5.3.0
+
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+	
+						<h4>Clase abstracta vs Interfaz</h4>
+						
+<pre><code data-trim contenteditable>						
+//Clase abstracta
+abstract class AbstractClass
+{
+    // El método abstracto sólo necesita definir los parámetros requeridos
+    abstract protected function prefixName($name);
+}
+
+class ConcreteClass extends AbstractClass
+{
+    // La clase derivada puede definir parámetros opcionales que no estén en la estructura del prototipo
+    public function prefixName($name, $separator = ".") {
+        if ($name == "Pacman") {
+            $prefix = "Mr";
+        } elseif ($name == "Pacwoman") {
+            $prefix = "Mrs";
+        } else {
+            $prefix = "";
+        }
+        return "{$prefix}{$separator} {$name}";
+    }
+}
+
+$class = new ConcreteClass;
+echo $class->prefixName("Pacman"), "\n";
+echo $class->prefixName("Pacwoman"), "\n";
+
+//Interfaces
+// Declarar la interfaz 'iTemplate'
+interface iTemplate
+{
+    public function setVariable($name, $var);
+    public function getHtml($template);
+}
+
+// Implementar la interfaz
+// Ésto funcionará 
+class Template implements iTemplate
+{
+    private $vars = array();
+  
+    public function setVariable($name, $var)
+    {
+        $this->vars[$name] = $var;
+    }
+  
+    public function getHtml($template)
+    {
+        foreach($this->vars as $name => $value) {
+            $template = str_replace('{' . $name . '}', $value, $template);
+        }
+ 
+        return $template;
+    }
+}
+// Ésto no funcionará
+// Error fatal: La Clase BadTemplate contiene un método abstracto
+// y por lo tanto debe declararse como abstracta (iTemplate::getHtml)
+class BadTemplate implements iTemplate
+{
+    private $vars = array();
+  
+    public function setVariable($name, $var)
+    {
+        $this->vars[$name] = $var;
+    }
+}
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+
+						<h4>Herencia</h4>
+						
+<pre><code data-trim contenteditable>						
+class Vehiculo {
+    public $matricula = '';
+    public $velocidad = 0;
+
+    public function aumentarVelocidad() {
+        $this->velocidad++;
+    }
+
+    public function disminuirVelocidad() {
+        $this->velocidad--;
+    }
+
+    public function parar() {
+        $this->velocidad = 0;
+    }
+}
+
+class Deportivo extends Vehiculo {
+    var $aleron_deportivo = true;
+    var $cristales_tintados = true;
+    var $musica = false;
+
+    public function ponerMusica() {
+        $this->musica = true;
+    }
+
+    public function apagarMusica() {
+        $this->musica = false;
+    }
+}
+
+$Deportivo = new Deportivo();
+$Deportivo->aumentarVelocidad();
+// velocidad = 1
+$Deportivo->aumentarVelocidad();
+// velocidad = 2
+$Deportivo->ponerMusica();
+// musica = true
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+
+						<h4>Clonación de objetos</h4>
+						
+<pre><code data-trim contenteditable>						
+ 
+class Persona
+{
+    private $_nombre;
+     
+    public function __construct( $nombre ){
+        $this->_nombre = $nombre;
+    }
+ 
+    public function __toString(){
+        return $this->_nombre;
+    }
+ 
+    public function setNombre( $nombre ){
+        $this->_nombre = $nombre;
+    }
+}
+ 
+$persona = new Persona('Juan');
+$persona2 = $persona;
+$persona3 = clone $persona;
+ 
+//Realizamos un cambio en $persona
+$persona->setNombre('Manolo');
+ 
+//Las variables $persona y $persona2 se verán afectadas por el cambio
+var_dump($persona); //Imprime: object(Persona)#1 (1) { ["_nombre":"Persona":private]=> string(6) "Manolo" }
+var_dump($persona2); //Imprime: object(Persona)#1 (1) { ["_nombre":"Persona":private]=> string(6) "Manolo" }
+ 
+//La variable $persona3 no se verá afectada
+var_dump($persona3); //Imprime: object(Persona)#2 (1) { ["_nombre":"Persona":private]=> string(4) "Juan" }
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Programación Orientada a Objetos</h2>
+	
+						<h4>Sobreescritura de métodos</h4>
+						
+<pre><code data-trim contenteditable>						
+class Rectangle {
+    public $height;
+    public $width;
+   
+    public function __construct($width, $height) {
+      	$this->width = $width;
+      	$this->height = $height;
+    }
+    
+    public function getArea() {
+      	return $this->height * $this->width;
+    }
+}
+
+class Square extends Rectangle {
+    public function __construct($size) {
+      	$this->height = $size;
+      	$this->width = $size;
+    }
+   
+    public function getArea() {
+      	return pow($this->height, 2);
+    }
+   
+}
+
+$obj = new Square(7);
+$a = $obj->getArea();
+echo "$a";
+</code></pre>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+					</section>
+				</section>
+
+				<section>
 					<h1>Próxima clase</h1>
-					<h3>Sábado 21 de septiembre de 2013</h3>
+					<h3>Domingo 22 de septiembre de 2013</h3>
 				</section>
 
 			</div>
