@@ -941,7 +941,7 @@ if (isset($_POST["subir"])) {
 							<li>Prevención de inyecciones SQL</li>
 						</ol>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -954,7 +954,7 @@ if (isset($_POST["subir"])) {
 $db = mysqli_connect("localhost", "root", "", "agenda") or die("Error " . mysqli_error($connection));
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -972,7 +972,7 @@ while ($data = mysqli_fecth_array($result)) {
 } 
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1056,7 +1056,7 @@ if (isset($_POST["save"])) {
 
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1064,7 +1064,6 @@ if (isset($_POST["save"])) {
 
 						<h4>Prevención de inyecciones SQL</h4>
 						
-						<p><img src="http://www.php.net/manual/es/images/fa7c5b5f326e3c4a6cc9db19e7edbaf0-xkcd-bobby-tables.png" /></p>
 <pre><code data-trim contenteditable>						
 //Nuestra consulta:
 $u = $_POST["usuario"]; //Admin
@@ -1081,7 +1080,17 @@ $db->query("SELECT * FROM Usuarios WHERE Usuario='$u' AND Password='$p'");
 //Accede al sistema.
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
+					</section>
+
+					<section>
+						<h2>Bases de Datos (MySQL)</h2>
+
+						<h4>Prevención de inyecciones SQL</h4>
+						
+						<p><img src="http://www.php.net/manual/es/images/fa7c5b5f326e3c4a6cc9db19e7edbaf0-xkcd-bobby-tables.png" /></p>
+
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 				</section>
 
@@ -1100,7 +1109,7 @@ $db->query("SELECT * FROM Usuarios WHERE Usuario='$u' AND Password='$p'");
 							<li>Métodos estáticos</li>
 						</ol>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1183,7 +1192,7 @@ $Coche->estado();
 echo $Coche->getPuertas();
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1206,7 +1215,7 @@ class MyDestructableClass {
 $obj = new MyDestructableClass();
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1250,7 +1259,7 @@ $nombreClase::unMétodoEstático(); // A partir de PHP 5.3.0
 
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1327,7 +1336,7 @@ class BadTemplate implements iTemplate
 }
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1376,7 +1385,7 @@ $Deportivo->ponerMusica();
 // musica = true
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1418,7 +1427,7 @@ var_dump($persona2); //Imprime: object(Persona)#1 (1) { ["_nombre":"Persona":pri
 var_dump($persona3); //Imprime: object(Persona)#2 (1) { ["_nombre":"Persona":private]=> string(4) "Juan" }
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 
 					<section>
@@ -1458,7 +1467,7 @@ $a = $obj->getArea();
 echo "$a";
 </code></pre>
 
-						<img style="border: none; float: right; margin-top: 0px;" height="150" src="images/logo.png" alt="Codejobs">
+						<img style="border: none; float: right; margin-top: 0px;" height="150" src="../reveal/images/logo.png" alt="Codejobs">
 					</section>
 				</section>
 
